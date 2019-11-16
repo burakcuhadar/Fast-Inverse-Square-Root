@@ -52,9 +52,6 @@ public class Test_Gleitpunktzahl {
             /*************
              * Eigene Tests einfuegen
              */
-            System.out.println(x.toString());
-            y = new Gleitpunktzahl(0.5);
-            System.out.println(y.toString());
             
         } catch (Exception e) {
             System.out.print("Exception bei der Auswertung des Ergebnis!!\n");
@@ -106,8 +103,6 @@ public class Test_Gleitpunktzahl {
             // Referenzwerte setzen
             gleitref = new Gleitpunktzahl((-1.25 - 0.75));
             
-            System.out.println(x.toString());
-            System.out.println(y.toString());
             
             // Berechnung
             gleiterg = x.sub(y);
