@@ -12,8 +12,9 @@ import javax.swing.JFrame;
  */
 public class Test_FastInverse {
 
-    /** Beispielwerte fuer IEEE Standard mit 32 Bits */
-    private static int MAGIC_NUMBER = 5000;
+    /** My own magic number for floating point numbers with 
+        4-bit exponent and 8-bit mantisse */
+    private static int MAGIC_NUMBER = 1332;
 
     private static int anzBitsExponent = 4;
     private static int anzBitsMantisse = 8;
@@ -32,43 +33,24 @@ public class Test_FastInverse {
 
         Gleitpunktzahl.setSizeExponent(anzBitsExponent);
         Gleitpunktzahl.setSizeMantisse(anzBitsMantisse);
-        //FastMath.setMagic(MAGIC_NUMBER);
-        
-        int bestMagic = 1000;
-        double smallestErr = Double.MAX_VALUE;
-        for(int i=1000; i<3000; i++) {
-        	FastMath.setMagic(i);
-        	double thisErr	= (FastMath.relInvSqrtErr(new Gleitpunktzahl(2.154))
-        					+ FastMath.relInvSqrtErr(new Gleitpunktzahl(32.5))
-        					+ FastMath.relInvSqrtErr(new Gleitpunktzahl(126.58))
-        					+ FastMath.relInvSqrtErr(new Gleitpunktzahl(23.4))
-        					+ FastMath.relInvSqrtErr(new Gleitpunktzahl(0.128)) ) / 5;
-        	if(thisErr < smallestErr) {
-        		smallestErr = thisErr;
-        		bestMagic = i;
-        	}
-        }
-        
-        System.out.println(bestMagic + "!!!");
-        
-        
-        /*
+        FastMath.setMagic(MAGIC_NUMBER);
+                            
         int numOfSamplingPts = 1001;
         float[] xData = new float[numOfSamplingPts];
         float[] yData = new float[numOfSamplingPts];
         float x = 0.10f;
-*/
+
         /* calculate data to plot */
-        /*for (int i = 0; i < numOfSamplingPts; i++) {
+        for (int i = 0; i < numOfSamplingPts; i++) {
             xData[i] = x;
             Gleitpunktzahl y = new Gleitpunktzahl(x);
             yData[i] = (float) FastMath.absInvSqrtErr(y);
 
             x *= Math.pow(100.0d, 1.0d / numOfSamplingPts);
-        }*/
+        }
 
         /* initialize plotter */
-        /*JFrame frame = new JFrame();
+        JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         try {
             frame.add(new Plotter(xData, yData));
@@ -78,6 +60,6 @@ public class Test_FastInverse {
         }
         frame.setSize(960, 720);
         frame.setLocation(0, 0);
-        frame.setVisible(true);*/
+        frame.setVisible(true);
     }
 }
